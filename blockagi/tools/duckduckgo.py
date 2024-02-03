@@ -1,14 +1,12 @@
+import json
 from itertools import islice
 from typing import Optional, Type
 
-from langchain.tools import DuckDuckGoSearchRun
-from langchain.tools import Tool
-from pydantic import BaseModel, Field
-from langchain.tools.base import BaseTool
-import json
-
 from blockagi.schema import BaseResourcePool
 from duckduckgo_search import DDGS
+from langchain.tools import DuckDuckGoSearchRun, Tool
+from langchain.tools.base import BaseTool
+from pydantic import BaseModel, Field
 
 # Search Answer Tool =================================
 
@@ -34,12 +32,8 @@ def DDGSearchAnswerTool():
 
 
 class SearchLinksSchema(BaseModel):
-    query: str = Field(
-        title="TOPIC", description="any topic you want find relevant links."
-    )
-    limit: Optional[int] = Field(
-        title="NUMBER", description="amount of links you want", default=20
-    )
+    query: str = Field(title="TOPIC", description="any topic you want find relevant links.")
+    limit: Optional[int] = Field(title="NUMBER", description="amount of links you want", default=20)
 
 
 class DDGSearchLinksTool(BaseTool):
@@ -56,9 +50,7 @@ class DDGSearchLinksTool(BaseTool):
         ddg = DDGS()
         results = list(islice(ddg.text(query), limit))
         for result in results:
-            self.resource_pool.add(
-                url=result["href"], description=result["title"], content=None
-            )
+            self.resource_pool.add(url=result["href"], description=result["title"], content=None)
         return {
             "citation": f"DuckDuckGo Search Links: {query}",
             "result": json.dumps(results, indent=2),

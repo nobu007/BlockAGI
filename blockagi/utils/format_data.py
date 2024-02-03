@@ -1,6 +1,7 @@
-import json
 import dataclasses
+import json
 from typing import Any, List
+
 from blockagi.schema import Objective, Resource
 
 
@@ -8,12 +9,7 @@ def format_objectives(objectives: List[Objective]) -> str:
     if len(objectives) == 0:
         return "- None"
 
-    return "\n".join(
-        [
-            f"{i+1}. {o.topic} (expertise: {o.expertise})"
-            for i, o in enumerate(objectives)
-        ]
-    )
+    return "\n".join([f"{i+1}. {o.topic} (expertise: {o.expertise})" for i, o in enumerate(objectives)])
 
 
 def format_resources(resources: List[Resource]) -> str:

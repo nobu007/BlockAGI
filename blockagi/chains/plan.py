@@ -1,17 +1,12 @@
 import json
-from typing import List, Dict, Any
-from langchain.chat_models.base import BaseChatModel
-from langchain.tools.base import BaseTool
-from langchain.schema import HumanMessage, SystemMessage
-from blockagi.chains.base import CustomCallbackLLMChain
-from blockagi.utils import (
-    to_json_str,
-    format_tools,
-    format_objectives,
-    format_resources,
-)
+from typing import Any, Dict, List
 
-from blockagi.schema import BaseResourcePool, Objective, Findings, ResearchTask
+from blockagi.chains.base import CustomCallbackLLMChain
+from blockagi.schema import BaseResourcePool, Findings, Objective, ResearchTask
+from blockagi.utils import format_objectives, format_resources, format_tools, to_json_str
+from langchain.chat_models.base import BaseChatModel
+from langchain.schema import HumanMessage, SystemMessage
+from langchain.tools.base import BaseTool
 
 
 class PlanChain(CustomCallbackLLMChain):

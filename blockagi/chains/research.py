@@ -1,10 +1,10 @@
 import json
-from typing import List, Dict, Any
 from dataclasses import asdict
-from blockagi.chains.base import CustomCallbackChain
-from langchain.tools.base import BaseTool
+from typing import Any, Dict, List
 
-from blockagi.schema import ResearchTask, ResearchResult
+from blockagi.chains.base import CustomCallbackChain
+from blockagi.schema import ResearchResult, ResearchTask
+from langchain.tools.base import BaseTool
 
 
 class ResearchChain(CustomCallbackChain):

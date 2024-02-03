@@ -1,23 +1,21 @@
 import os
+import threading
+import webbrowser
+from dataclasses import dataclass
+from datetime import datetime
+from typing import Any, Dict, Optional
+
 import dotenv
 import typer
 import uvicorn
-import webbrowser
-import threading
-from typing import Any, Dict, Optional
-from datetime import datetime
-from dataclasses import dataclass
+from blockagi.chains.base import BlockAGICallbackHandler
+from blockagi.resource_pool import ResourcePool
+from blockagi.run import run_blockagi
+from blockagi.schema import Findings, Narrative, Objective, Resource
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from langchain.callbacks.base import BaseCallbackHandler
 from starlette.responses import FileResponse
-
-
-from blockagi.chains.base import BlockAGICallbackHandler
-from blockagi.schema import Objective, Findings, Narrative, Resource
-from blockagi.resource_pool import ResourcePool
-from blockagi.run import run_blockagi
-
 
 app = FastAPI()
 

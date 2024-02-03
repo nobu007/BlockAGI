@@ -1,20 +1,16 @@
 import json
 import os
-from langchain.tools.base import BaseTool
-from pydantic import BaseModel, Field
 from typing import Optional, Type
 
 from blockagi.schema import BaseResourcePool
 from googleapiclient.discovery import build
+from langchain.tools.base import BaseTool
+from pydantic import BaseModel, Field
 
 
 class GoogleLinksSchema(BaseModel):
-    query: str = Field(
-        title="TOPIC", description="any topic you want find relevant links."
-    )
-    limit: Optional[int] = Field(
-        title="NUMBER", description="amount of links you want", default=20
-    )
+    query: str = Field(title="TOPIC", description="any topic you want find relevant links.")
+    limit: Optional[int] = Field(title="NUMBER", description="amount of links you want", default=20)
 
 
 class GoogleSearchLinksTool(BaseTool):
@@ -31,11 +27,7 @@ class GoogleSearchLinksTool(BaseTool):
         if not os.getenv("GOOGLE_API_KEY") or not os.getenv("GOOGLE_CSE_ID"):
             raise ValueError("Cannot use Google; No GOOGLE_API_KEY and GOOGLE_CSE_ID")
         service = build("customsearch", "v1", developerKey=os.getenv("GOOGLE_API_KEY"))
-        result = (
-            service.cse()
-            .list(q=query, cx=os.getenv("GOOGLE_CSE_ID"), num=limit)
-            .execute()
-        )
+        result = service.cse().list(q=query, cx=os.getenv("GOOGLE_CSE_ID"), num=limit).execute()
         for e in result["items"]:
             self.resource_pool.add(url=e["link"], description=e["title"], content=None)
         return {

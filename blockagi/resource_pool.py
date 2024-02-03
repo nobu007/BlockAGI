@@ -1,7 +1,8 @@
 from dataclasses import dataclass, field
 from typing import List, Optional
+
+from blockagi.schema import BaseResourcePool, Resource
 from url_normalize import url_normalize
-from blockagi.schema import Resource, BaseResourcePool
 
 
 @dataclass

@@ -1,5 +1,6 @@
 import time
-from typing import Dict, Any
+from typing import Any, Dict
+
 from langchain.callbacks.base import BaseCallbackHandler
 from langchain.chains.base import Chain
 from langchain.chat_models.base import BaseChatModel
@@ -14,9 +15,7 @@ class BlockAGICallbackHandler(BaseCallbackHandler):
         pass
 
     # New big cycle's PRIME step ends
-    def on_step_end(
-        self, step: str, inputs: Dict[str, Any], outputs: Dict[str, Any]
-    ) -> Any:
+    def on_step_end(self, step: str, inputs: Dict[str, Any], outputs: Dict[str, Any]) -> Any:
         """Run on step end."""
         pass
 

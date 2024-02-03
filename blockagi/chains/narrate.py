@@ -1,11 +1,11 @@
-from typing import List, Dict, Any
-from langchain.chat_models.base import BaseChatModel
-from langchain.tools.base import BaseTool
-from langchain.schema import HumanMessage, SystemMessage
-from blockagi.chains.base import CustomCallbackLLMChain
-from blockagi.utils import to_json_str, format_objectives
+from typing import Any, Dict, List
 
-from blockagi.schema import Objective, Findings, ResearchResult, Narrative
+from blockagi.chains.base import CustomCallbackLLMChain
+from blockagi.schema import Findings, Narrative, Objective, ResearchResult
+from blockagi.utils import format_objectives, to_json_str
+from langchain.chat_models.base import BaseChatModel
+from langchain.schema import HumanMessage, SystemMessage
+from langchain.tools.base import BaseTool
 
 
 class NarrateChain(CustomCallbackLLMChain):
@@ -54,9 +54,7 @@ class NarrateChain(CustomCallbackLLMChain):
         if len(current_chunk) > 0:
             chunks.append(current_chunk)
 
-        self.fire_log(
-            f"Applying {len(research_results)} results splitting into {len(chunks)} chunks"
-        )
+        self.fire_log(f"Applying {len(research_results)} results splitting into {len(chunks)} chunks")
         # Call each chunk and pass the narrative to the next chunk
         current_narrative = findings.narrative
         for index, chunk in enumerate(chunks):

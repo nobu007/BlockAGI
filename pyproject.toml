@@ -1,33 +1,58 @@
 [tool.poetry]
-name = "blockagi"
-version = "0.1.0"
-description = ""
 authors = [
-    "Paul Nattapatsiri <paul@blockpipe.io>",
-    "Sorawit Suriyakarn <swit@blockpipe.io>",
+  "Paul Nattapatsiri <paul@blockpipe.io>",
+  "Sorawit Suriyakarn <swit@blockpipe.io>",
 ]
+description = ""
 license = "Apache-2.0"
+name = "blockagi"
 readme = "README.md"
+version = "0.1.0"
 
 [tool.poetry.dependencies]
-python = "^3.9"
-langchain = "^0.0.215"
 duckduckgo-search = "^3.8.3"
-playwright = "^1.35.0"
-html2text = "^2020.1.16"
-url-normalize = "^1.4.3"
 fastapi = "^0.98.0"
-openai = "^0.27.8"
-typer = "^0.9.0"
-uvicorn = "^0.22.0"
-pip = "^23.1.2"
-python-dotenv = "^1.0.0"
 google-api-python-client = "^2.91.0"
-
+html2text = "^2020.1.16"
+langchain = "^0.0.215"
+openai = "^0.27.8"
+pip = "^23.1.2"
+playwright = "^1.35.0"
+python = "^3.9"
+python-dotenv = "^1.0.0"
+typer = "^0.9.0"
+url-normalize = "^1.4.3"
+uvicorn = "^0.22.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"
 
 [build-system]
-requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core"]
+[tool.pysen]
+version = "0.10"
+
+[tool.pysen.lint]
+enable_black = true
+enable_flake8 = true
+enable_isort = true
+enable_mypy = true
+line_length = 119
+mypy_preset = "strict"
+py_version = "PY310"
+
+[[tool.pysen.lint.mypy_targets]]
+paths = ["."]
+
+[tool.flake8]
+max-line-length = 119
+
+[tool.isort]
+ensure_newline_before_comments = true
+force_grid_wrap = 0
+include_trailing_comma = true
+line_length = 119
+multi_line_output = 3
+profile = "black"
+use_parentheses = true

@@ -1,12 +1,8 @@
 import os
+
 from blockagi.chains import BlockAGIChain
 from blockagi.schema import Findings
-from blockagi.tools import (
-    DDGSearchAnswerTool,
-    DDGSearchLinksTool,
-    GoogleSearchLinksTool,
-    VisitWebTool,
-)
+from blockagi.tools import DDGSearchAnswerTool, DDGSearchLinksTool, GoogleSearchLinksTool, VisitWebTool
 from langchain.chat_models import ChatOpenAI
 
 
@@ -34,9 +30,7 @@ def run_blockagi(
 
     blockagi_callback.on_log_message(
         f"Using {len(tools)} tools:\n"
-        + "\n".join(
-            [f"{idx+1}. {t.name} - {t.description}" for idx, t in enumerate(tools)]
-        )
+        + "\n".join([f"{idx+1}. {t.name} - {t.description}" for idx, t in enumerate(tools)])
     )
 
     llm = ChatOpenAI(

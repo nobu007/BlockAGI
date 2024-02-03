@@ -1,17 +1,14 @@
-from typing import List, Union
-from langchain.tools import Tool
 import json
+from typing import List, Union
+
+from langchain.tools import Tool
 
 
 def generate_schema_dict(pydantic_model):
     schema = pydantic_model.schema()
     properties = schema.get("properties", {})
     required = schema.get("required", [])
-    defaults = {
-        name: field.default
-        for name, field in pydantic_model.__fields__.items()
-        if not field.required
-    }
+    defaults = {name: field.default for name, field in pydantic_model.__fields__.items() if not field.required}
 
     result = {}
     for key, value in properties.items():

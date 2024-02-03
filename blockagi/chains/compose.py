@@ -1,15 +1,14 @@
-from typing import List, Dict, Any, Optional
-from langchain.callbacks.base import BaseCallbackHandler
-from langchain.chat_models.base import BaseChatModel
-from langchain.callbacks.base import BaseCallbackHandler
-from langchain.tools.base import BaseTool
+from typing import Any, Dict, List, Optional
 
-from blockagi.schema import BaseResourcePool
-from blockagi.chains.base import CustomCallbackLLMChain, CustomCallbackChain
+from blockagi.chains.base import CustomCallbackChain, CustomCallbackLLMChain
+from blockagi.chains.evaluate import EvaluateChain
+from blockagi.chains.narrate import NarrateChain
 from blockagi.chains.plan import PlanChain
 from blockagi.chains.research import ResearchChain
-from blockagi.chains.narrate import NarrateChain
-from blockagi.chains.evaluate import EvaluateChain
+from blockagi.schema import BaseResourcePool
+from langchain.callbacks.base import BaseCallbackHandler
+from langchain.chat_models.base import BaseChatModel
+from langchain.tools.base import BaseTool
 
 
 class BlockAGIChain(CustomCallbackLLMChain):
@@ -62,9 +61,7 @@ class BlockAGIChain(CustomCallbackLLMChain):
             # Run through all the chains
             for chain in self.chains:
                 # Call the callback
-                self.fire_callback(
-                    event="on_step_start", step=chain.__class__.__name__, inputs=inputs
-                )
+                self.fire_callback(event="on_step_start", step=chain.__class__.__name__, inputs=inputs)
                 # Call the current step
                 outputs = chain(inputs=inputs)
                 # Call the callback

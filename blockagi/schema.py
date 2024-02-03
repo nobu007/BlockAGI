@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import List, Dict, Any, Optional
+from typing import Any, Dict, List, Optional
 
 
 @dataclass
@@ -48,9 +48,7 @@ class BaseResourcePool(ABC):
         pass
 
     @abstractmethod
-    def add(
-        self, url: str, description: Optional[str] = None, content: Optional[str] = None
-    ) -> None:
+    def add(self, url: str, description: Optional[str] = None, content: Optional[str] = None) -> None:
         pass
 
     @abstractmethod

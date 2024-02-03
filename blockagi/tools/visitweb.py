@@ -1,7 +1,7 @@
+from blockagi.schema import BaseResourcePool
+from html2text import HTML2Text
 from playwright.sync_api import sync_playwright
 from pydantic import BaseModel, Field
-from html2text import HTML2Text
-from blockagi.schema import BaseResourcePool
 
 
 def extract_data(url: str) -> str:

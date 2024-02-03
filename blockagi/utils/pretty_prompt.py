@@ -1,6 +1,7 @@
 from typing import List
-from langchain.schema import BaseMessage
+
 from langchain.prompts import ChatPromptTemplate
+from langchain.schema import BaseMessage
 
 
 def pretty_prompt(messages: List[BaseMessage]) -> str:
