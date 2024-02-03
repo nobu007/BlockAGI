@@ -1,9 +1,18 @@
 import os
+import sys
 
 from blockagi.chains import BlockAGIChain
 from blockagi.schema import Findings
 from blockagi.tools import DDGSearchAnswerTool, DDGSearchLinksTool, GoogleSearchLinksTool, VisitWebTool
 from langchain.chat_models import ChatOpenAI
+
+# commonモジュールをインポートする
+COMMON_MOD_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../common"))
+print("COMMON_MOD_DIR=", COMMON_MOD_DIR)
+sys.path.append(COMMON_MOD_DIR)
+
+
+from yka_langchain import yka_get_llm
 
 
 def run_blockagi(
@@ -32,14 +41,14 @@ def run_blockagi(
         f"Using {len(tools)} tools:\n"
         + "\n".join([f"{idx+1}. {t.name} - {t.description}" for idx, t in enumerate(tools)])
     )
-
-    llm = ChatOpenAI(
-        temperature=0.8,
-        streaming=True,
-        model=openai_model,
-        openai_api_key=openai_api_key,
-        callbacks=[llm_callback],
-    )  # type: ignore
+    llm = yka_get_llm()
+    # llm = ChatOpenAI(
+    #     temperature=0.8,
+    #     streaming=True,
+    #     model=openai_model,
+    #     openai_api_key=openai_api_key,
+    #     callbacks=[llm_callback],
+    # )  # type: ignore
 
     inputs = {
         "objectives": objectives,

@@ -2,7 +2,7 @@ import time
 from typing import Any, Dict
 
 from langchain.callbacks.base import BaseCallbackHandler
-from langchain.chains.base import Chain
+from langchain.chains import LLMChain
 from langchain.chat_models.base import BaseChatModel
 
 
@@ -35,7 +35,7 @@ class BlockAGICallbackHandler(BaseCallbackHandler):
 
 
 # Base class that supports custom handlers
-class CustomCallbackChain(Chain):
+class CustomCallbackChain(LLMChain):
     # HACK: LangChain doesn't support custom handlers yet, so we have to use this workaround
     def fire_callback(self, event: str, **kwargs: Any) -> None:
         for callback in self.callbacks:

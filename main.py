@@ -92,6 +92,7 @@ def on_startup():
             run_blockagi(**kwargs)
         except Exception as e:
             app.state.blockagi_state.add_agent_log(f"Error: {e}")
+            print("XXXX", e)
         app.state.blockagi_state.end_time = datetime.utcnow().isoformat()
 
     threading.Thread(
